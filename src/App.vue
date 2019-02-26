@@ -79,5 +79,7 @@ body{
   left:0;
   top:0;
   z-index:97;
+  box-sizing:border-box;
+  padding-right:20px;
 }
 </style>

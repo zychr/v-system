@@ -1,6 +1,6 @@
 <template>
 <div>
-  <button @click="showpeople()">{{stuname}}</button>
+  <h2>学生列表</h2>
   <el-table
     :data="tableData2"
     style="width: 100%"
@@ -20,6 +20,7 @@
       label="地址">
     </el-table-column>
   </el-table>
+  
 </div>
 </template>
 
@@ -34,7 +35,11 @@
 </style>
 
 <script>
+  import Child from './children'
   export default {
+    components:{
+      Child
+    },
     methods: {
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
@@ -47,6 +52,7 @@
     },
     data() {
       return {
+        hellojaja:'hehehehehe',
         tableData2: [{
           date: '2016-05-02',
           name: '王小虎',
@@ -63,8 +69,7 @@
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
-        }],
-        msg:'zhou'
+        }]
       }
     },
     computed:{

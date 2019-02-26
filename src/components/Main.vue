@@ -1,7 +1,7 @@
 <template>
   <div>
-    <router-view class="sidebar" to="/sidebar"></router-view>
-    <router-view class="content" to="/content"></router-view>
+    <router-view class="sidebar" name="/sidebar"></router-view>
+    <router-view class="content" name="/content"></router-view>
   </div>
 </template>
 

@@ -1,10 +1,13 @@
 <template>
    <ul class="menu">
       <li>
-         <router-link to="/teachers">教师列表</router-link>
+         <router-link to="/teachers" exact>教师列表</router-link>
       </li>
-       <li>
-         <router-link to="/students">学生列表</router-link>
+      <li>
+         <router-link to="/students" exact>学生列表</router-link>
+      </li>
+      <li>
+         <router-link to="/shooping" exact>书籍列表</router-link>
       </li>
    </ul>
 </template>
