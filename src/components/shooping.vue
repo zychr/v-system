@@ -28,7 +28,7 @@
             <td>{{item.price | money("元")}}</td>
             <td>{{item.num*item.price | money("元")}}</td>
             <td>
-               <el-button type="primary" @click="delPro(item)">删除</el-button>
+               <el-button type="primary" @click="delPro(index)">删除</el-button>
             </td>
         </tr>
         <tr>
@@ -44,7 +44,7 @@
             <p>确定删除吗？</p>
             <span class="el-icon-error" @click="show_dia=false"></span>
             <div>
-               <el-button type="primary" size="small">确定</el-button>
+               <el-button type="primary" size="small" @click="toDel">确定</el-button>
                <el-button type="success" size="small" @click="show_dia=false">取消</el-button>
             </div>
          </div>
@@ -115,7 +115,8 @@ export default {
         checkAll:false,
         priceArr:[],
         numArr:[],
-        show_dia:false
+        show_dia:false,
+        del_pro:-1
       };
     },
     mounted(){
@@ -191,6 +192,18 @@ export default {
       },
       delPro(item){
           this.show_dia=true;
+          this.del_pro=item;
+      },
+      toDel(){
+          if(this.del_pro>-1){
+              this.books.splice(this.del_pro,1);
+              this.show_dia=false;
+              this.countAll();
+              if(this.books.length<1){
+                 this.total=0;
+                 this.checkAll=false;
+              }
+          }
       }
     }
 }
