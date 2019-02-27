@@ -25,22 +25,34 @@
                <input type="input" v-model="item.num" value="item.num" class="pnum">
                <a @click.stop="admitNum(item,1)" class="handa">+</a>
             </td>
-            <td>{{item.price | money}}</td>
-            <td>{{item.num*item.price | money}}</td>
+            <td>{{item.price | money("元")}}</td>
+            <td>{{item.num*item.price | money("元")}}</td>
             <td>
-               <el-button type="primary">删除</el-button>
+               <el-button type="primary" @click="delPro(item)">删除</el-button>
             </td>
         </tr>
         <tr>
             <td>
                <input type="checkbox" v-model="checkAll"  @change="pickAll">
             </td>
-            <td colspan="7">总计：{{total | money }}</td>
+            <td colspan="7">总计：{{total | money("元") }}</td>
         </tr>
      </table>
+     <transition name="fade">
+     <div class="overlay" v-show="show_dia">
+         <div class="dia">
+            <p>确定删除吗？</p>
+            <span class="el-icon-error" @click="show_dia=false"></span>
+            <div>
+               <el-button type="primary" size="small">确定</el-button>
+               <el-button type="success" size="small" @click="show_dia=false">取消</el-button>
+            </div>
+         </div>
+     </div>
+     </transition>
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
    table{
        width:100%;
        border-collapse: collapse;
@@ -64,6 +76,34 @@
         cursor:pointer;
         font-size:20px;
     }
+    .overlay{
+        position:fixed;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,.2);
+        top:0;
+        left:0;
+        padding-left:180px;
+        .dia{
+            position:absolute;
+            width:300px;
+            height:150px;
+            left:50%;
+            margin-left:-150px;
+            top:50%;
+            margin-top:-75px;
+            background:#fff;
+            p{
+                margin-top:40px;
+                margin-bottom:30px;
+            }
+            span{
+                position:absolute;
+                right:10px;
+                top:10px;
+            }
+        }
+    }
 </style>
 <script>
 export default {
@@ -74,7 +114,8 @@ export default {
         total:0,
         checkAll:false,
         priceArr:[],
-        numArr:[]
+        numArr:[],
+        show_dia:false
       };
     },
     mounted(){
@@ -83,8 +124,8 @@ export default {
        })
     },
     filters:{
-       money(value){
-         return "￥"+value+"元"
+       money(value,pm){
+         return "￥"+value+pm
        }
     },
     methods: {
@@ -147,6 +188,9 @@ export default {
                 _this.total+=detail.price*detail.num
             }
         })
+      },
+      delPro(item){
+          this.show_dia=true;
       }
     }
 }
