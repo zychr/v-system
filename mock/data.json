@@ -6,7 +6,7 @@
                 "productName":"JAVA测试驱动开发",
                 "num":2,
                 "price":24,
-                "img":"../../assets/images/java.png",
+                "img":"./static/images/java.png",
                 "id":1,
                 "isBuy":false
             },
@@ -14,7 +14,7 @@
                 "productName":"php从入门到精通",
                 "num":5,
                 "price":24,
-                "img":"../../assets/images/php.png",
+                "img":"./static/images/php.png",
                 "id":2,
                 "isBuy":false
             },
@@ -22,7 +22,7 @@
                 "productName":"javascript面向对象编程",
                 "num":4,
                 "price":24,
-                "img":"../../assets/images/php.png",
+                "img":"./static/images/javascript.png",
                 "id":3,
                 "isBuy":false
             }

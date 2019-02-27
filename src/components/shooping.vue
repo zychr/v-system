@@ -3,6 +3,7 @@
      <table class="s_head">
         <tr>
             <td></td>
+            <td>图片</td>
             <td>商品名称</td>
             <td>商品数量</td>
             <td>编辑数量</td>
@@ -14,10 +15,15 @@
             <td>
                <input type="checkbox" :value="item.id" v-model="checked" @change="checkOne">
             </td>
+            <td>
+               <img :src="item.img">
+            </td>
             <td>{{item.productName}}</td>   
             <td>{{item.num}}</td>
             <td>
-               <el-input-number v-model="item.num" :min="1" :max="10" label="描述文字"></el-input-number>
+               <a @click.stop="admitNum(item,-1)" class="handa">-</a>
+               <input type="input" v-model="item.num" value="item.num" class="pnum">
+               <a @click.stop="admitNum(item,1)" class="handa">+</a>
             </td>
             <td>{{item.price | money}}</td>
             <td>{{item.num*item.price | money}}</td>
@@ -29,7 +35,7 @@
             <td>
                <input type="checkbox" v-model="checkAll"  @change="pickAll">
             </td>
-            <td colspan="5">总计：{{total | money }}</td>
+            <td colspan="7">总计：{{total | money }}</td>
         </tr>
      </table>
   </div>
@@ -44,6 +50,19 @@
     }
     td{
        padding:8px 4px;
+       color:#2c3e50;
+    }
+    .pnum{
+        width:30px;
+        height:30px;
+        text-align:center;
+        line-height:30px;
+        border:1px solid #ddd;
+        margin:0 10px;
+    }
+    a.handa{
+        cursor:pointer;
+        font-size:20px;
     }
 </style>
 <script>
@@ -104,18 +123,30 @@ export default {
                 _this.total+=detail.price*detail.num
             })
           }else{
-              _this.total=0;
               this.checkAll=false;
-              _this.books.forEach(function(detail){
-                 if(_this.checked.indexOf(detail.id)>-1){
-                     _this.total+=detail.price*detail.num
-                 }
-            })
+              this.countAll();
           };
           
       },
+      admitNum(va,type){
+          if(type>0){
+             va.num++
+          }else{
+              va.num--;
+              if(va.num<1){
+                 va.num=1
+              }
+          }
+          this.countAll();
+      },
       countAll(){
-       
+        let _this=this;
+        _this.total=0;
+        _this.books.forEach(function(detail){
+            if(_this.checked.indexOf(detail.id)>-1){
+                _this.total+=detail.price*detail.num
+            }
+        })
       }
     }
 }
