@@ -2,7 +2,7 @@
   <div id="app">
     <div class="header">
        <div class="logo">
-          <img src="./assets/images/logo2.png">
+          <img src="">
        </div>
        <div class="login">
            <a>登录</a> / <a>注册</a>
